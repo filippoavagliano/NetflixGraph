@@ -66,18 +66,18 @@ CREATE (t)-[:TYPE_OF]->(x)
 
 --------------------------------------------------------------------------------------------
 
-Query per film singolo:
+SEARCH BY MOVIE TITLE:
 match (a:Actor),(c:Country),(d:Director),(g:Genre),(r:Rating),(t:Title),(ti:Type)
 WHERE t.titleName="Apaches" AND (a)-[:ACTED_IN]->(t) AND (t)-[:DIRECTED_BY]->(d) AND (t)-[:FILMED_IN]->(c) AND (t)-[:LISTED_IN]->(g) AND (t)-[:RATED]->(r) AND (t)-[:TYPE_OF]->(ti)
 RETURN t.duratduration,t.releaseYear,r.rating,t.description,d.directorName,a.actoractorName,g.genre,t.dateAdded
 
 
-//Query per farti restituire i generi di tipo "movie"
+SEARCH BY "MOVIE" PRODUCT TYPE:
 MATCH (t:Title),(g:Genre),(tp:Type)
 WHERE tp.typeName="Movie" AND NOT(g.genre CONTAINS "Shows") AND (t)-[:TYPE_OF]->(tp) AND (t)-[:LISTED_IN]->(g)
 RETURN DISTINCT g.genre
 
-//Query per farti restituire i generi di tipo "tv shows"
+SEARCH BY "TV SHOW" PRODUCT TYPE:
 MATCH (t:Title),(g:Genre),(tp:Type)
 WHERE tp.typeName="TV Show" AND NOT(g.genre CONTAINS "Movies") AND (t)-[:TYPE_OF]->(tp) AND (t)-[:LISTED_IN]->(g)
 RETURN DISTINCT g.genre
