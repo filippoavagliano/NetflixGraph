@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>film/categoria</title>
+
+    <script src="node_modules/chart.js/dist/Chart.bundle.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="Hover-master/css/hover.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/></link>
+    <link rel="stylesheet" href="style.css"/></link>
+
+</head>
+<body onload="getGrafico()">
+
+
+<canvas id="filmcategoria" style="height:70vh; width:80vw"></canvas>
+
+</br></br></br>
+<div class="container">
+    <div class="row justify-content-center">
+        <label>start year</label>
+        <input style="width: 5em;" value="2010" min="1942" max="2020" type="number" id="startY"/>
+        &nbsp &nbsp &nbsp
+        <label>end year</label>
+        <input style="width: 5em;" value="2020" min="1942" max="2020" type="number" id="finalY"/>
+        &nbsp &nbsp &nbsp
+        <button  id="go" onclick="getGrafico()">go</button>
+    </div>
+</div>
+
+<script type="application/javascript">
+    function getGrafico()
+    {
+        var startY = document.getElementById("startY").value;
+        var finalY = document.getElementById("finalY").value;
+
+        $.post("getGFilmCategorie.php", {startY:startY,finalY:finalY},function (data,status) {
+            $("#filmcategoria").html(data);
+
+        });
+
+        modal.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
