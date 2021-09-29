@@ -9,6 +9,7 @@ DATABASE SNIPPETS
 IMPORT TITLES:
 LOAD CSV WITH HEADERS FROM "file:///netflix_titles.csv" AS line with line where line.title is not null and line.date_added is not null and line.release_year is not null and line.duration is not null and line.description is not null
 CREATE (:Title{titleName:line.title,dateAdded:line.date_added,releaseYear:toInteger(line.release_year),duration:line.duration,description:line.description})
+
 --------------------------------------------------------------------------------------------
 
 DELETE RELATIONSHIP:
